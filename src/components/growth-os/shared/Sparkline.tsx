@@ -1,5 +1,6 @@
 "use client";
 
+import { CHART_FONT } from "@/app/fonts";
 import type { ApexOptions } from "apexcharts";
 import dynamic from "next/dynamic";
 
@@ -14,7 +15,7 @@ interface SparklineProps {
 
 export default function Sparkline({ data, color, name, height = 56 }: SparklineProps) {
   const options: ApexOptions = {
-    chart: { type: "area", sparkline: { enabled: true }, fontFamily: "Outfit, sans-serif", animations: { enabled: false } },
+    chart: { type: "area", sparkline: { enabled: true }, fontFamily: CHART_FONT, animations: { enabled: false } },
     colors: [color],
     stroke: { curve: "smooth", width: 2 },
     fill: { type: "gradient", gradient: { opacityFrom: 0.35, opacityTo: 0 } },

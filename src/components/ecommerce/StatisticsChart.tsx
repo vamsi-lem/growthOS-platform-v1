@@ -1,5 +1,6 @@
 "use client";
 
+import { CHART_FONT } from "@/app/fonts";
 import { CalenderIcon } from "@/icons";
 import { ApexOptions } from "apexcharts";
 import flatpickr from "flatpickr";
@@ -38,7 +39,7 @@ export default function StatisticsChart() {
     },
     colors: ["#059669", "#6EE7B7"], // Define line colors
     chart: {
-      fontFamily: "Outfit, sans-serif",
+      fontFamily: CHART_FONT,
       height: 310,
       type: "line", // Set the chart type to 'line'
       toolbar: {

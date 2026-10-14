@@ -4,7 +4,7 @@
 
 @theme {
   --font-*: initial;
-  --font-outfit: Outfit, sans-serif;
+  --font-jakarta: var(--font-plus-jakarta), ui-sans-serif, system-ui, sans-serif;
 
   --breakpoint-*: initial;
   --breakpoint-2xsm: 375px;
@@ -190,7 +190,7 @@
   }
 
   body {
-    @apply relative z-1 bg-white font-outfit font-normal;
+    @apply relative z-1 bg-white font-jakarta font-normal;
   }
 }
 

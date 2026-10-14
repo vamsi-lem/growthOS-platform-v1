@@ -1,5 +1,6 @@
 "use client";
 
+import { CHART_FONT } from "@/app/fonts";
 import ComponentCard from "@/components/common/ComponentCard";
 import type { ApexOptions } from "apexcharts";
 import { useTranslations } from "next-intl";
@@ -12,7 +13,7 @@ export default function MeetingSources() {
   const t = useTranslations("growthOs.client");
 
   const options: ApexOptions = {
-    chart: { type: "bar", height: 260, fontFamily: "Outfit, sans-serif", toolbar: { show: false } },
+    chart: { type: "bar", height: 260, fontFamily: CHART_FONT, toolbar: { show: false } },
     colors: ["#059669"],
     plotOptions: { bar: { horizontal: true, borderRadius: 5, barHeight: "48%" } },
     dataLabels: { enabled: true, formatter: (v) => `${v}%`, style: { fontSize: "12px", fontWeight: 600 }, offsetX: 6 },

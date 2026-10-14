@@ -1,5 +1,6 @@
 "use client";
 
+import { CHART_FONT } from "@/app/fonts";
 import { ApexOptions } from "apexcharts";
 
 import dynamic from "next/dynamic";
@@ -12,7 +13,7 @@ export default function BarChartOne() {
   const options: ApexOptions = {
     colors: ["#059669"],
     chart: {
-      fontFamily: "Outfit, sans-serif",
+      fontFamily: CHART_FONT,
       type: "bar",
       height: 180,
       toolbar: {
@@ -62,7 +63,7 @@ export default function BarChartOne() {
       show: true,
       position: "top",
       horizontalAlign: "left",
-      fontFamily: "Outfit",
+      fontFamily: CHART_FONT,
     },
     yaxis: {
       title: {

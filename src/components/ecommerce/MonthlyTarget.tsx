@@ -1,5 +1,6 @@
 "use client";
 
+import { CHART_FONT } from "@/app/fonts";
 import { MoreDotIcon } from "@/icons";
 import { ApexOptions } from "apexcharts";
 import { useTranslations } from "next-intl";
@@ -22,7 +23,7 @@ export default function MonthlyTarget() {
   const options: ApexOptions = {
     colors: ["#059669"],
     chart: {
-      fontFamily: "Outfit, sans-serif",
+      fontFamily: CHART_FONT,
       type: "radialBar",
       height: 330,
       sparkline: {

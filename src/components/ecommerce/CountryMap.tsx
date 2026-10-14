@@ -1,3 +1,4 @@
+import { CHART_FONT } from "@/app/fonts";
 import { worldMill } from "@react-jvectormap/world";
 import dynamic from "next/dynamic";
 import React from "react";
@@ -88,7 +89,7 @@ const CountryMap: React.FC<CountryMapProps> = ({ mapColor }) => {
         initial: {
           fill: mapColor || "#D0D5DD",
           fillOpacity: 1,
-          fontFamily: "Outfit",
+          fontFamily: CHART_FONT,
           stroke: "none",
           strokeWidth: 0,
           strokeOpacity: 0,

@@ -5,15 +5,12 @@ import { type Locale, routing } from "@/i18n/routing";
 import "flatpickr/dist/flatpickr.css";
 import { NextIntlClientProvider } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
-import { Outfit } from "next/font/google";
 import { notFound } from "next/navigation";
 import "simplebar-react/dist/simplebar.min.css";
 import "swiper/css/bundle";
 import "../globals.css";
+import { jakarta } from "../fonts";
 
-const outfit = Outfit({
-  subsets: ["latin"],
-});
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -36,7 +33,7 @@ export default async function RootLayout({
 
   return (
     <html lang={locale} dir={isRtl(locale as Locale) ? "rtl" : "ltr"}>
-      <body className={`${outfit.className} dark:bg-gray-900`}>
+      <body className={`${jakarta.variable} ${jakarta.className} dark:bg-gray-900`}>
         <NextIntlClientProvider>
           <ThemeProvider>
             <SidebarProvider>{children}</SidebarProvider>

@@ -1,24 +1,33 @@
 "use client";
 
-import Switch from "@/components/form/switch/Switch";
 import { useGrowthOS } from "@/context/GrowthOSContext";
+import { CodeIcon } from "@/icons";
+import { cn } from "@/utils";
 import { useTranslations } from "next-intl";
 
+/** Developer spec toggle, styled for the dark dock. */
 export default function SidebarWidget() {
   const t = useTranslations("growthOs.devSpec");
   const { devSpec, setDevSpec } = useGrowthOS();
 
   return (
-    <div className="pb-20">
-      <div className="mx-auto rounded-2xl bg-gray-50 px-4 py-5 dark:bg-white/3">
-        <div className="flex items-start justify-between gap-3">
-          <div>
-            <h3 className="mb-1 font-semibold text-gray-900 dark:text-white">{t("title")}</h3>
-            <p className="text-theme-sm text-gray-500 dark:text-gray-400">{t("desc")}</p>
-          </div>
-          <Switch key={String(devSpec)} defaultChecked={devSpec} onChange={setDevSpec} />
-        </div>
-      </div>
-    </div>
+    <button
+      type="button"
+      role="switch"
+      aria-checked={devSpec}
+      onClick={() => setDevSpec(!devSpec)}
+      className="flex w-full items-center gap-3 rounded-2xl border border-white/10 p-3 text-start transition-colors hover:bg-white/5"
+    >
+      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-white/5 text-gray-300">
+        <CodeIcon className="size-4" />
+      </span>
+      <span className="min-w-0 flex-1">
+        <span className="block text-theme-sm font-semibold text-white">{t("title")}</span>
+        <span className="block truncate text-theme-xs text-gray-400">{t("desc")}</span>
+      </span>
+      <span className={cn("relative h-5 w-9 shrink-0 rounded-full transition-colors", devSpec ? "bg-brand-500" : "bg-white/15")}>
+        <span className={cn("absolute top-0.5 h-4 w-4 rounded-full bg-white shadow-theme-sm transition-all", devSpec ? "start-4.5" : "start-0.5")} />
+      </span>
+    </button>
   );
 }

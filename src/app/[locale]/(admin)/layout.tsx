@@ -19,8 +19,8 @@ export default function AdminLayout({
   const mainContentMargin = isMobileOpen
     ? "ms-0"
     : isExpanded || isHovered
-    ? "xl:ms-72.5"
-    : "xl:ms-22.5";
+    ? "xl:ms-74"
+    : "xl:ms-26";
 
   return (
     <GrowthOSProvider>

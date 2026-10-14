@@ -288,22 +288,22 @@ export interface Highlight { k: string; v: string; d: string; up: boolean; c: st
 // c: chart colour (hex from the @theme palette)
 export const highlights: Record<PersonId, Highlight[]> = {
   nitesh: [
-    { k: "Meetings booked", v: "9", d: "+2 vs last week", up: true, c: "#0EA5E9", s: [3, 4, 4, 6, 5, 7, 7, 9] },
+    { k: "Meetings booked", v: "9", d: "+2 vs last week", up: true, c: "#059669", s: [3, 4, 4, 6, 5, 7, 7, 9] },
     { k: "Pipeline created", v: "$186K", d: "+$41K", up: true, c: "#059669", s: [62, 70, 88, 97, 120, 131, 145, 186] },
-    { k: "Reply rate", v: "6.8%", d: "+0.9 pts", up: true, c: "#F79009", s: [4.1, 4.6, 5.2, 4.9, 5.8, 6.1, 5.9, 6.8] },
-    { k: "AI answer share", v: "17%", d: "−2 pts", up: false, c: "#7A5AF8", s: [12, 14, 15, 18, 19, 20, 19, 17] },
+    { k: "Reply rate", v: "6.8%", d: "+0.9 pts", up: true, c: "#059669", s: [4.1, 4.6, 5.2, 4.9, 5.8, 6.1, 5.9, 6.8] },
+    { k: "AI answer share", v: "17%", d: "−2 pts", up: false, c: "#059669", s: [12, 14, 15, 18, 19, 20, 19, 17] },
   ],
   mac: [
     { k: "Pipeline · all tenants", v: "$412K", d: "+$88K", up: true, c: "#059669", s: [180, 210, 236, 260, 301, 330, 358, 412] },
-    { k: "Contribution", v: "76%", d: "both tiers", up: true, c: "#0EA5E9", s: [70, 71, 73, 72, 74, 75, 76, 76] },
-    { k: "Model spend", v: "$285", d: "of $450 cap", up: false, c: "#F04438", s: [120, 150, 170, 196, 214, 240, 262, 285] },
-    { k: "AM capacity", v: "3 / 3", d: "Nitesh is full", up: false, c: "#F79009", s: [1, 1, 2, 2, 2, 3, 3, 3] },
+    { k: "Contribution", v: "76%", d: "both tiers", up: true, c: "#059669", s: [70, 71, 73, 72, 74, 75, 76, 76] },
+    { k: "Model spend", v: "$285", d: "of $450 cap", up: false, c: "#059669", s: [120, 150, 170, 196, 214, 240, 262, 285] },
+    { k: "AM capacity", v: "3 / 3", d: "Nitesh is full", up: false, c: "#059669", s: [1, 1, 2, 2, 2, 3, 3, 3] },
   ],
   rajesh: [
     { k: "Jobs run today", v: "1,284", d: "99.7% ok", up: true, c: "#059669", s: [800, 920, 1010, 1100, 1150, 1190, 1240, 1284] },
-    { k: "Adapter errors", v: "3", d: "HeyReach · Mailchimp", up: false, c: "#F04438", s: [1, 0, 2, 1, 0, 1, 2, 3] },
-    { k: "p95 job time", v: "4.2s", d: "−0.6s", up: true, c: "#0EA5E9", s: [6.1, 5.8, 5.5, 5.2, 4.9, 4.8, 4.6, 4.2] },
-    { k: "Cost today", v: "$11.40", d: "T2 is 71%", up: true, c: "#7A5AF8", s: [8, 9, 10, 9, 11, 10, 12, 11.4] },
+    { k: "Adapter errors", v: "3", d: "HeyReach · Mailchimp", up: false, c: "#059669", s: [1, 0, 2, 1, 0, 1, 2, 3] },
+    { k: "p95 job time", v: "4.2s", d: "−0.6s", up: true, c: "#059669", s: [6.1, 5.8, 5.5, 5.2, 4.9, 4.8, 4.6, 4.2] },
+    { k: "Cost today", v: "$11.40", d: "T2 is 71%", up: true, c: "#059669", s: [8, 9, 10, 9, 11, 10, 12, 11.4] },
   ],
 };
 
@@ -336,10 +336,10 @@ export const actions: Record<PersonId, Action[]> = {
 export const pipeline = {
   weeks: ["W34", "W35", "W36", "W37", "W38", "W39", "W40", "W41"],
   series: [
-    { l: "Planned waves", c: "#059669", v: [40, 46, 52, 58, 66, 70, 74, 82] },
-    { l: "Signal-led", c: "#0EA5E9", v: [8, 12, 18, 22, 30, 34, 40, 52] },
-    { l: "Organic search", c: "#7A5AF8", v: [10, 11, 13, 12, 15, 18, 20, 24] },
-    { l: "Events", c: "#F79009", v: [4, 4, 6, 5, 9, 9, 11, 28] },
+    { l: "Planned waves", c: "#064E3B", v: [40, 46, 52, 58, 66, 70, 74, 82] },
+    { l: "Signal-led", c: "#059669", v: [8, 12, 18, 22, 30, 34, 40, 52] },
+    { l: "Organic search", c: "#34D399", v: [10, 11, 13, 12, 15, 18, 20, 24] },
+    { l: "Events", c: "#A7F3D0", v: [4, 4, 6, 5, 9, 9, 11, 28] },
   ],
 };
 
@@ -399,9 +399,9 @@ export const campaigns: Campaign[] = [
     source: { tool: "Apollo", q: "Raised a Series A in the last 24 months · NYC metro · 11–200 staff · B2B SaaS" },
     gates: [["Saved search", 1284], ["ICP fit", 512], ["Verified email", 388], ["Suppression", 341]],
     branches: [
-      { ch: "Superhuman", sub: "Personal outbox · from Mac", n: 40, c: "#059669", tip: "superhuman", rule: "Top 40 by account score. Sent from Mac’s own inbox, one at a time." },
-      { ch: "HeyReach", sub: "LinkedIn note", n: 186, c: "#0EA5E9", tip: "heyreach", rule: "Active on LinkedIn in the last 30 days and not in the top 40." },
-      { ch: "Mailchimp", sub: "Breakfast invite", n: 115, c: "#F79009", tip: "mailchimp", rule: "Existing NYC subscribers only. Mailchimp never sees a cold contact." },
+      { ch: "Superhuman", sub: "Personal outbox · from Mac", n: 40, c: "#064E3B", tip: "superhuman", rule: "Top 40 by account score. Sent from Mac’s own inbox, one at a time." },
+      { ch: "HeyReach", sub: "LinkedIn note", n: 186, c: "#047857", tip: "heyreach", rule: "Active on LinkedIn in the last 30 days and not in the top 40." },
+      { ch: "Mailchimp", sub: "Breakfast invite", n: 115, c: "#059669", tip: "mailchimp", rule: "Existing NYC subscribers only. Mailchimp never sees a cold contact." },
     ],
     days: ["Oct 7", "Oct 9", "Oct 11", "Oct 14", "Oct 16", "Oct 20", "21–23"],
     cadence: [
@@ -414,8 +414,8 @@ export const campaigns: Campaign[] = [
     source: { tool: "Apollo", q: "Saved search conscendo-style: VP Sales · Series A SaaS · US · 30–50 staff" },
     gates: [["Saved search", 612], ["ICP fit", 401], ["Verified email", 251], ["Suppression", 231]],
     branches: [
-      { ch: "Instantly", sub: "Cold lane · dedicated domain", n: 183, c: "#059669", tip: "cold", rule: "Apollo-sourced, so it stays on the cold lane with its own domain." },
-      { ch: "HeyReach", sub: "LinkedIn after email goes quiet", n: 48, c: "#0EA5E9", tip: "heyreach", rule: "Opens LinkedIn only after 7 quiet days on email." },
+      { ch: "Instantly", sub: "Cold lane · dedicated domain", n: 183, c: "#064E3B", tip: "cold", rule: "Apollo-sourced, so it stays on the cold lane with its own domain." },
+      { ch: "HeyReach", sub: "LinkedIn after email goes quiet", n: 48, c: "#047857", tip: "heyreach", rule: "Opens LinkedIn only after 7 quiet days on email." },
     ],
     days: ["Day 0", "Day 3", "Day 7", "Day 10", "Day 14"],
     cadence: [["Instantly", ["Email 1", "Email 2", "", "Email 3", ""]], ["HeyReach", ["", "", "Connect", "", "Note"]]],
@@ -423,7 +423,7 @@ export const campaigns: Campaign[] = [
   { id: "cfo", tn: "cs", name: "CFO pricing wave", dates: "Live since 24 Sep", goal: "CFOs at $50–200M manufacturers running Salesforce", owner: "Nitesh R.", st: "Live", target: 8, booked: 3,
     source: { tool: "Apollo", q: "CFO · Manufacturing · $50–200M · Sales Cloud detected" },
     gates: [["Saved search", 480], ["ICP fit", 300], ["Verified email", 196], ["Suppression", 184]],
-    branches: [{ ch: "Instantly", sub: "Cold lane", n: 184, c: "#059669", tip: "cold", rule: "Cold lane, Conscendo domain warmed for six weeks." }],
+    branches: [{ ch: "Instantly", sub: "Cold lane", n: 184, c: "#064E3B", tip: "cold", rule: "Cold lane, Conscendo domain warmed for six weeks." }],
     days: ["Day 0", "Day 4", "Day 9", "Day 15"],
     cadence: [["Instantly", ["Quote-to-cash note", "Case: freight", "Ask for 20 min", "Break-up"]]],
     sim: { replies: 14, booked: 5 } },

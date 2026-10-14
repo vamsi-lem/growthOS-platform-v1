@@ -3,9 +3,9 @@ import { tenants } from "./data";
 
 /** Tenant colour as a Tailwind background class (brand / warning / success scales). */
 export const tenantDotClass: Record<TenantId, string> = {
-  lg: "bg-brand-500",
-  mg: "bg-warning-500",
-  cs: "bg-blue-light-500",
+  lg: "bg-brand-800",
+  mg: "bg-brand-500",
+  cs: "bg-brand-300",
 };
 
 export const tenantName = (id: TenantId | "all") =>

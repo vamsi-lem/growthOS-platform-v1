@@ -18,6 +18,7 @@ export { default as ChevronLeftIcon } from "./chevron-left.svg";
 export { default as ChevronUpIcon } from "./chevron-up.svg";
 export { default as CloseLineIcon } from "./close-line.svg";
 export { default as CloseIcon } from "./close.svg";
+export { default as CodeIcon } from "./code.svg";
 export { default as CopyIcon } from "./copy.svg";
 export { default as DocsIcon } from "./docs.svg";
 export { default as DollarLineIcon } from "./dollar-line.svg";

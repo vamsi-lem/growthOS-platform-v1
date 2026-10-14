@@ -1,5 +1,6 @@
 "use client";
 
+import { CHART_FONT } from "@/app/fonts";
 import { ApexOptions } from "apexcharts";
 
 import dynamic from "next/dynamic";
@@ -17,7 +18,7 @@ export default function LineChartOne() {
     },
     colors: ["#059669", "#6EE7B7"], // Define line colors
     chart: {
-      fontFamily: "Outfit, sans-serif",
+      fontFamily: CHART_FONT,
       height: 310,
       width: "100%",
       type: "line", // Set the chart type to 'line'

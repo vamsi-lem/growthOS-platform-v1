@@ -1,7 +1,7 @@
 "use client";
 
-import { access, routes, type ScreenId } from "@/components/growth-os/data";
-import GrowthLogo from "@/components/growth-os/shared/GrowthLogo";
+import { access, routes, type ScreenId, users } from "@/components/growth-os/data";
+import AvatarText from "@/components/ui/avatar/AvatarText";
 import { useGrowthOS } from "@/context/GrowthOSContext";
 import { Link, usePathname } from "@/i18n/navigation";
 import { cn } from "@/utils";
@@ -16,7 +16,7 @@ import {
   EyeIcon,
   GridIcon,
   GroupIcon,
-  HorizontaLDots,
+  LemniscateIcon,
   ListIcon,
   PaperPlaneIcon,
   PieChartIcon,
@@ -25,46 +25,30 @@ import {
 } from "../icons/index";
 import SidebarWidget from "./SidebarWidget";
 
-type NavItem = { key: ScreenId; icon: React.ReactNode };
+type NavItem = { key: ScreenId; icon: React.ComponentType<{ className?: string }> };
 type NavGroup = { key: string; items: NavItem[] };
 
 const navGroups: NavGroup[] = [
-  { key: "HOME", items: [{ key: "today", icon: <GridIcon /> }, { key: "run", icon: <TimeIcon /> }] },
-  { key: "DECIDE", items: [{ key: "cockpit", icon: <CheckCircleIcon /> }] },
-  {
-    key: "RUN",
-    items: [
-      { key: "signals", icon: <BoltIcon /> },
-      { key: "campaigns", icon: <PaperPlaneIcon /> },
-      { key: "waves", icon: <ListIcon /> },
-      { key: "replies", icon: <ChatIcon /> },
-    ],
-  },
-  {
-    key: "KNOW",
-    items: [
-      { key: "brain", icon: <DocsIcon /> },
-      { key: "leads", icon: <GroupIcon /> },
-      { key: "search", icon: <PieChartIcon /> },
-    ],
-  },
-  { key: "SHARE", items: [{ key: "client", icon: <EyeIcon /> }] },
-  {
-    key: "GOVERN",
-    items: [
-      { key: "tenants", icon: <PlugInIcon /> },
-      { key: "cost", icon: <DollarLineIcon /> },
-    ],
-  },
+  { key: "HOME", items: [{ key: "today", icon: GridIcon }, { key: "run", icon: TimeIcon }] },
+  { key: "DECIDE", items: [{ key: "cockpit", icon: CheckCircleIcon }] },
+  { key: "RUN", items: [{ key: "signals", icon: BoltIcon }, { key: "campaigns", icon: PaperPlaneIcon }, { key: "waves", icon: ListIcon }, { key: "replies", icon: ChatIcon }] },
+  { key: "KNOW", items: [{ key: "brain", icon: DocsIcon }, { key: "leads", icon: GroupIcon }, { key: "search", icon: PieChartIcon }] },
+  { key: "SHARE", items: [{ key: "client", icon: EyeIcon }] },
+  { key: "GOVERN", items: [{ key: "tenants", icon: PlugInIcon }, { key: "cost", icon: DollarLineIcon }] },
 ];
 
+/**
+ * Floating dock navigation: a dark rounded panel inset from the viewport edge.
+ * Expanded it shows labels; collapsed it becomes an icon rail with hover labels.
+ */
 const AppSidebar: React.FC = () => {
   const { isExpanded, isMobileOpen, isHovered, setIsHovered } = useSidebar();
   const pathname = usePathname();
-  const t = useTranslations("growthOs.nav");
+  const t = useTranslations("growthOs");
   const { role, queue, signals, replies, inScope } = useGrowthOS();
-  const showText = isExpanded || isHovered || isMobileOpen;
+  const open = isExpanded || isHovered || isMobileOpen;
   const allowed = access[role];
+  const user = users[role];
 
   const badges: Partial<Record<ScreenId, number>> =
     role === "client"
@@ -81,77 +65,89 @@ const AppSidebar: React.FC = () => {
 
   return (
     <aside
-      className={`fixed top-0 left-0 z-50 flex h-full flex-col border-r border-gray-200 bg-white px-5 text-gray-900 transition-all duration-300 ease-in-out xl:mt-0 rtl:right-0 rtl:left-auto rtl:border-r-0 rtl:border-l dark:border-gray-800 dark:bg-gray-900 ${
-        isExpanded || isMobileOpen ? "w-72.5" : isHovered ? "w-72.5" : "w-22.5"
-      } ${
-        isMobileOpen
-          ? "translate-x-0"
-          : "-translate-x-full rtl:translate-x-full"
-      } xl:translate-x-0 xl:rtl:translate-x-0`}
+      className={cn(
+        "fixed inset-y-3 start-3 z-50 flex flex-col rounded-3xl bg-gray-950 text-white shadow-theme-xl ring-1 ring-white/5 transition-all duration-300 ease-in-out",
+        open ? "w-68" : "w-20",
+        isMobileOpen ? "translate-x-0" : "-translate-x-[calc(100%+1rem)] rtl:translate-x-[calc(100%+1rem)]",
+        "xl:translate-x-0 xl:rtl:translate-x-0",
+      )}
       onMouseEnter={() => !isExpanded && setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className={cn("flex py-8", !isExpanded && !isHovered ? "xl:justify-center" : "justify-start")}>
-        <Link href="/">
-          <GrowthLogo compact={!showText} />
-        </Link>
-      </div>
-      <div className="no-scrollbar flex flex-col overflow-y-auto duration-300 ease-linear">
-        <nav className="mb-6">
-          <div className="flex flex-col gap-4">
-            {groups.map((group) => (
-              <div key={group.key}>
-                <h2
-                  className={cn(
-                    "mb-3 flex text-xs leading-5 text-gray-400 uppercase",
-                    !isExpanded && !isHovered ? "xl:justify-center" : "justify-start",
-                  )}
-                >
-                  {showText ? t(`groups.${group.key}`) : <HorizontaLDots />}
-                </h2>
-                <ul className="flex flex-col gap-1">
-                  {group.items.map((nav) => {
-                    const path = routes[nav.key];
-                    const active = pathname === path;
-                    const badge = badges[nav.key] ?? 0;
-                    return (
-                      <li key={nav.key}>
-                        <Link
-                          href={path}
-                          className={cn(
-                            "group menu-item",
-                            active ? "menu-item-active" : "menu-item-inactive",
-                            !showText && "xl:justify-center",
-                          )}
-                          title={showText ? undefined : t(`items.${nav.key}`)}
-                        >
-                          <span className={cn("relative", active ? "menu-item-icon-active" : "menu-item-icon-inactive")}>
-                            {nav.icon}
-                            {!showText && badge > 0 && (
-                              <span className="absolute -top-1 -end-1 h-2 w-2 rounded-full bg-brand-500" />
-                            )}
-                          </span>
-                          {showText && <span className="menu-item-text">{t(`items.${nav.key}`)}</span>}
-                          {showText && badge > 0 && (
-                            <span
-                              className={cn(
-                                "ms-auto menu-dropdown-badge",
-                                active ? "menu-dropdown-badge-active" : "menu-dropdown-badge-inactive",
-                              )}
-                            >
-                              {badge}
-                            </span>
-                          )}
-                        </Link>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </div>
-            ))}
+      {/* Brand */}
+      <Link href="/" className={cn("flex items-center gap-3 px-5 pt-6 pb-5", !open && "justify-center px-0")}>
+        <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-brand-500 shadow-lg shadow-brand-500/30">
+          <LemniscateIcon className="h-4 w-7 text-white" />
+        </span>
+        {open && (
+          <span className="min-w-0">
+            <span className="block text-lg leading-tight font-bold tracking-tight">{t("brand.name")}</span>
+            <span className="block truncate text-theme-xs text-gray-400">{t("brand.by")}</span>
+          </span>
+        )}
+      </Link>
+
+      <div className={cn("mx-4 h-px bg-white/10", !open && "mx-3")} />
+
+      {/* Navigation */}
+      <nav className="no-scrollbar flex-1 overflow-y-auto px-3 py-4">
+        {groups.map((group) => (
+          <div key={group.key} className="mb-4 last:mb-0">
+            {open ? (
+              <p className="mb-1.5 px-3 text-theme-xs font-semibold tracking-widest text-gray-500 uppercase">{t(`nav.groups.${group.key}`)}</p>
+            ) : (
+              <span className="mx-auto mb-2 block h-px w-6 bg-white/10" />
+            )}
+            <ul className="flex flex-col gap-1">
+              {group.items.map(({ key, icon: Icon }) => {
+                const active = pathname === routes[key];
+                const badge = badges[key] ?? 0;
+                return (
+                  <li key={key} className="group/item relative">
+                    <Link
+                      href={routes[key]}
+                      aria-current={active ? "page" : undefined}
+                      className={cn(
+                        "flex items-center gap-3 rounded-2xl p-1.5 text-theme-sm font-medium transition-all",
+                        !open && "justify-center",
+                        active ? "bg-brand-500 text-white shadow-lg shadow-brand-500/25" : "text-gray-400 hover:bg-white/5 hover:text-white",
+                      )}
+                    >
+                      <span className={cn("relative flex h-9 w-9 shrink-0 items-center justify-center rounded-xl", active ? "bg-white/15" : "bg-white/5 group-hover/item:bg-white/10")}>
+                        <Icon className="size-5" />
+                        {!open && badge > 0 && <span className="absolute -top-1 -end-1 h-2.5 w-2.5 rounded-full bg-brand-400 ring-2 ring-gray-950" />}
+                      </span>
+                      {open && <span className="flex-1 truncate">{t(`nav.items.${key}`)}</span>}
+                      {open && badge > 0 && (
+                        <span className={cn("me-1.5 min-w-6 rounded-full px-2 py-0.5 text-center text-theme-xs font-semibold", active ? "bg-white text-brand-600" : "bg-white/10 text-gray-200")}>{badge}</span>
+                      )}
+                    </Link>
+                    {/* Hover label for the collapsed rail */}
+                    {!open && (
+                      <span className="pointer-events-none absolute start-full top-1/2 z-50 ms-3 hidden -translate-y-1/2 rounded-lg bg-gray-900 px-2.5 py-1.5 text-theme-xs font-medium whitespace-nowrap text-white shadow-theme-lg group-hover/item:block xl:group-hover/item:block">
+                        {t(`nav.items.${key}`)}
+                      </span>
+                    )}
+                  </li>
+                );
+              })}
+            </ul>
           </div>
-        </nav>
-        {showText ? <SidebarWidget /> : null}
+        ))}
+      </nav>
+
+      {/* Footer: developer spec + who is signed in */}
+      <div className="space-y-3 p-3">
+        {open && <SidebarWidget />}
+        <div className={cn("flex items-center gap-3 rounded-2xl bg-white/5 p-2.5", !open && "justify-center bg-transparent p-0")}>
+          <AvatarText name={user.name} className="shrink-0" />
+          {open && (
+            <span className="min-w-0">
+              <span className="block truncate text-theme-sm font-semibold">{user.name}</span>
+              <span className="block truncate text-theme-xs text-gray-400">{user.title}</span>
+            </span>
+          )}
+        </div>
       </div>
     </aside>
   );

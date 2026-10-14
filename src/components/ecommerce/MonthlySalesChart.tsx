@@ -1,5 +1,6 @@
 "use client";
 
+import { CHART_FONT } from "@/app/fonts";
 import { MoreDotIcon } from "@/icons";
 import { ApexOptions } from "apexcharts";
 import { useTranslations } from "next-intl";
@@ -34,7 +35,7 @@ export default function MonthlySalesChart() {
   const options: ApexOptions = {
     colors: ["#059669"],
     chart: {
-      fontFamily: "Outfit, sans-serif",
+      fontFamily: CHART_FONT,
       type: "bar",
       height: 180,
       toolbar: {
@@ -71,7 +72,7 @@ export default function MonthlySalesChart() {
       show: true,
       position: "top",
       horizontalAlign: "left",
-      fontFamily: "Outfit",
+      fontFamily: CHART_FONT,
     },
     yaxis: {
       title: {
